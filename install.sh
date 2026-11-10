@@ -81,6 +81,13 @@ if [ ! -f "./bin/pocketbase" ]; then
     chmod +x ./bin/pocketbase
 fi
 
+# Older installers left the binary in the repo root, where it is parsed as a
+# module by Rollup and breaks the build. Remove a stale file copy if present.
+if [ -f "./pocketbase" ]; then
+    echo "🧹 Removing stale ./pocketbase (moved to ./bin in this version)..."
+    rm -f "./pocketbase"
+fi
+
 # --- Build the frontend pointed at the right backend ---
 # Self-hosted by default. A custom VITE_POCKETBASE_URL (e.g. a public URL for
 # your own PocketBase behind a reverse proxy) is honored in the default mode.
