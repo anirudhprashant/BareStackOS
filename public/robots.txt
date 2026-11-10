@@ -1,0 +1,6 @@
+# BareStackOS — the app behind app.barestack.org
+# Private share links and account settings should never be crawled.
+User-agent: *
+Allow: /
+Disallow: /share/
+Disallow: /settings
