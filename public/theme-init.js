@@ -7,6 +7,9 @@
     var dark = pref === 'dark' || (pref === 'system' && window.matchMedia('(prefers-color-scheme: dark)').matches);
     var design = localStorage.getItem('barestack.design') === 'barestack' ? 'barestack' : 'classic';
     var root = document.documentElement;
+    // index.html ships Classic by default; remove those classes first so a
+    // saved BareStack choice cannot end up with both themes applied.
+    root.classList.remove('light', 'dark', 'theme-classic', 'theme-barestack');
     root.classList.add(dark ? 'dark' : 'light', 'theme-' + design);
     root.setAttribute('data-design', design);
   } catch (e) { /* storage blocked: stay light, classic */ }
