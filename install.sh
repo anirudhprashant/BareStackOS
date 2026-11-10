@@ -35,7 +35,7 @@ echo "📦 Installing dependencies..."
 npm install
 
 # --- Download PocketBase (matches the version running in production) ---
-if [ ! -f "./pocketbase" ]; then
+if [ ! -f "./bin/pocketbase" ]; then
     echo "📥 Downloading PocketBase ${PB_VERSION}..."
     case "$(uname -s)" in
         Darwin) OS="darwin" ;;
@@ -72,9 +72,13 @@ if [ ! -f "./pocketbase" ]; then
         fi
         echo "✅ SHA256 matches BARESTACK_PB_SHA256."
     fi
-    unzip -o pocketbase.zip pocketbase
+    mkdir -p ./bin
+    # Extract into ./bin: a file named "pocketbase" in the repo root shadows
+    # the npm package of the same name during vite build (Rollup resolves the
+    # bare import to the binary and the build dies).
+    unzip -o pocketbase.zip pocketbase -d ./bin
     rm -f pocketbase.zip
-    chmod +x pocketbase
+    chmod +x ./bin/pocketbase
 fi
 
 # --- Build the frontend pointed at the right backend ---
@@ -97,7 +101,7 @@ fi
 
 # --- Self-hosted: collections are created from version-controlled migrations ---
 echo "📡 Applying database schema via migrations..."
-./pocketbase migrate up --dir ./pb_data --migrationsDir ./pb_migrations
+./bin/pocketbase migrate up --dir ./pb_data --migrationsDir ./pb_migrations
 
 # --- Create an admin (superuser) with a RANDOM password, shown once ---
 ADMIN_EMAIL="${BARESTACK_ADMIN_EMAIL:-admin@barestack.local}"
@@ -106,7 +110,7 @@ if [ -n "${BARESTACK_ADMIN_PASSWORD:-}" ]; then
 else
     ADMIN_PASSWORD="$(LC_ALL=C tr -dc 'A-Za-z0-9' </dev/urandom | head -c 24)"
 fi
-./pocketbase superuser upsert "$ADMIN_EMAIL" "$ADMIN_PASSWORD" --dir ./pb_data >/dev/null
+./bin/pocketbase superuser upsert "$ADMIN_EMAIL" "$ADMIN_PASSWORD" --dir ./pb_data >/dev/null
 
 # --- Launcher ---
 cat > start.sh << STARTSCRIPT
@@ -121,7 +125,7 @@ echo "🚀 Starting BareStack CRM..."
 #   - restrict origins with --origins=https://your-app-domain.example
 #   - set --publicUrl=https://api.your-domain.example
 # so the API and admin console aren't reachable over plaintext.
-./pocketbase serve --dir ./pb_data --migrationsDir ./pb_migrations --hooksDir ./pb_hooks --http="0.0.0.0:${PB_PORT}" &
+./bin/pocketbase serve --dir ./pb_data --migrationsDir ./pb_migrations --hooksDir ./pb_hooks --http="0.0.0.0:${PB_PORT}" &
 PB_PID=\$!
 sleep 2
 # serve.cjs is the production static server: security headers, gzip, caching,

@@ -20,6 +20,8 @@ pnpm-debug.log*
 .env.*.local
 
 # PocketBase
+bin/pocketbase
+/pocketbase
 *.db
 *.db-shm
 *.db-wal

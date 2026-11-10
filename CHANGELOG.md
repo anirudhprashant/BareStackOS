@@ -27,6 +27,19 @@ a rebuild.
 
 - Settings → Appearance is now Settings → Themes (theme, then light/dark mode).
 
+### Fixed
+
+- **The one-command installer failed on a clean Linux machine.** `install.sh`
+  unpacked the PocketBase binary into the repo root as `./pocketbase`, which
+  shadowed the npm package of the same name when Rollup resolved the
+  `pocketbase` import during `vite build` (`Failed to parse source for import
+  analysis`). The binary now lives in `./bin/pocketbase`, and `start.sh`, the
+  README and the manual-setup steps point there. Existing installs are
+  unaffected: the app, the database and `./pb_data` do not move.
+- A real `public/robots.txt` for `app.barestack.org`. The SPA fallback used to
+  answer `/robots.txt` with `index.html`; private share links (`/share/…`) and
+  `/settings` are now explicitly disallowed.
+
 ## [1.2.0] - 2026-09-26
 
 Upgrading: pull, rebuild, and restart PocketBase with `--migrationsDir

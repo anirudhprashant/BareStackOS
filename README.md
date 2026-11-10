@@ -90,9 +90,10 @@ change the admin API and may not match these migrations):
 ```bash
 PB_VERSION=0.36.2
 # Linux amd64 (use linux_arm64 / darwin_arm64 / darwin_amd64 as appropriate):
+mkdir -p bin
 curl -fL "https://github.com/pocketbase/pocketbase/releases/download/v${PB_VERSION}/pocketbase_${PB_VERSION}_linux_amd64.zip" -o pocketbase.zip
-unzip -o pocketbase.zip pocketbase
-chmod +x pocketbase
+unzip -o pocketbase.zip pocketbase -d bin
+chmod +x bin/pocketbase
 ```
 
 ### 3. Apply the Schema
@@ -101,13 +102,13 @@ The collections and their owner-only access rules are version-controlled in
 `pb_migrations/`. Apply them; no manual collection creation needed:
 
 ```bash
-./pocketbase migrate up --dir ./pb_data --migrationsDir ./pb_migrations
+./bin/pocketbase migrate up --dir ./pb_data --migrationsDir ./pb_migrations
 ```
 
 Then create an admin (superuser):
 
 ```bash
-./pocketbase superuser upsert admin@barestack.local "$(openssl rand -base64 18)" --dir ./pb_data
+./bin/pocketbase superuser upsert admin@barestack.local "$(openssl rand -base64 18)" --dir ./pb_data
 ```
 
 ### 4. Configure Environment
@@ -121,7 +122,7 @@ VITE_POCKETBASE_URL=http://127.0.0.1:8092
 ### 5. Build and Run
 
 ```bash
-./pocketbase serve --dir ./pb_data --migrationsDir ./pb_migrations --hooksDir ./pb_hooks --http="0.0.0.0:8092" &
+./bin/pocketbase serve --dir ./pb_data --migrationsDir ./pb_migrations --hooksDir ./pb_hooks --http="0.0.0.0:8092" &
 npm run build
 PORT=8080 node serve.cjs
 ```
