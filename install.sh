@@ -115,7 +115,10 @@ ADMIN_EMAIL="${BARESTACK_ADMIN_EMAIL:-admin@barestack.local}"
 if [ -n "${BARESTACK_ADMIN_PASSWORD:-}" ]; then
     ADMIN_PASSWORD="$BARESTACK_ADMIN_PASSWORD"
 else
-    ADMIN_PASSWORD="$(LC_ALL=C tr -dc 'A-Za-z0-9' </dev/urandom | head -c 24)"
+    # Read a fixed chunk, then trim: `tr ... | head -c 24` makes tr die of
+    # SIGPIPE, and under `set -o pipefail` that aborts the install *after*
+    # migrations, before start.sh is written.
+    ADMIN_PASSWORD="$(head -c 512 /dev/urandom | LC_ALL=C tr -dc 'A-Za-z0-9' | cut -c1-24)"
 fi
 ./bin/pocketbase superuser upsert "$ADMIN_EMAIL" "$ADMIN_PASSWORD" --dir ./pb_data >/dev/null
 
