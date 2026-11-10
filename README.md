@@ -3,7 +3,7 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/anirudhprashant/barestack-app/actions/workflows/ci.yml"><img alt="CI" src="https://img.shields.io/github/actions/workflow/status/anirudhprashant/barestack-app/ci.yml?style=flat-square&label=CI&labelColor=141C11&color=C37624"></a>
+  <a href="https://github.com/anirudhprashant/BareStackOS/actions/workflows/ci.yml"><img alt="CI" src="https://img.shields.io/github/actions/workflow/status/anirudhprashant/BareStackOS/ci.yml?style=flat-square&label=CI&labelColor=141C11&color=C37624"></a>
   <img alt="v1.2.0" src="https://img.shields.io/badge/version-1.2.0-141C11?style=flat-square&labelColor=141C11&color=3B4834">
   <a href="LICENSE"><img alt="AGPL-3.0" src="https://img.shields.io/badge/license-AGPL--3.0-C37624?style=flat-square&labelColor=141C11"></a>
   <img alt="React + PocketBase" src="https://img.shields.io/badge/React%20·%20TypeScript%20·%20PocketBase-141C11?style=flat-square&labelColor=141C11&color=3B4834">
@@ -46,7 +46,7 @@
 ## Install in one command
 
 ```bash
-curl -sSL https://raw.githubusercontent.com/anirudhprashant/barestack-app/main/install.sh | bash
+curl -sSL https://raw.githubusercontent.com/anirudhprashant/BareStackOS/main/install.sh | bash
 ```
 
 Or if you already have the repo:

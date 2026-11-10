@@ -1,6 +1,6 @@
 # BareStack CRM — Security & Architecture Audit
 
-**Repository:** `github.com/anirudhprashant/barestack-app`
+**Repository:** `github.com/anirudhprashant/BareStackOS`
 **Commit reviewed:** `87c630c` (`main`, up to date)
 **Date:** 2026-06-19
 **Method:** read-only review of source, PocketBase migrations, build/serve/CI config, and dependency manifest. All claims cite `file:line`. No files were executed or modified during the review.

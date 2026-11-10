@@ -222,6 +222,6 @@ enough to pin a version to.
   a modified version as a network service, AGPL-3.0 section 13 requires you to
   offer users the source of your modified version.
 
-[1.2.0]: https://github.com/anirudhprashant/barestack-app/releases/tag/v1.2.0
-[1.1.0]: https://github.com/anirudhprashant/barestack-app/releases/tag/v1.1.0
-[1.0.0]: https://github.com/anirudhprashant/barestack-app/releases/tag/v1.0.0
+[1.2.0]: https://github.com/anirudhprashant/BareStackOS/releases/tag/v1.2.0
+[1.1.0]: https://github.com/anirudhprashant/BareStackOS/releases/tag/v1.1.0
+[1.0.0]: https://github.com/anirudhprashant/BareStackOS/releases/tag/v1.0.0

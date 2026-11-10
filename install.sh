@@ -6,7 +6,7 @@ set -euo pipefail
 #   ./install.sh            # self-hosted: app talks to YOUR local PocketBase (default)
 #   ./install.sh --cloud    # build against the hosted BareStack cloud (api.barestack.org)
 #
-# curl -sSL https://raw.githubusercontent.com/anirudhprashant/barestack-app/main/install.sh | bash
+# curl -sSL https://raw.githubusercontent.com/anirudhprashant/BareStackOS/main/install.sh | bash
 #
 # Tip: piping to bash runs unverified code from the network. Prefer downloading
 # the script, reviewing it, and running locally. You can pin the PocketBase
